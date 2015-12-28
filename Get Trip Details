@@ -1,0 +1,162 @@
+## API Recipes: API Tasks
+This series of API Recipes describes API tasks associated with Apps for Travel Management Companies, (TMC), Travel Suppliers and business who need to get data about their employees’ travel related booking.  This recipe assumes you are a current Concur customer.
+#### Before you begin
+Review the following checklist to ensure you are able to perform the task in this recipe. To see reference information, click the link in the bullet point
+
+- Understand the [Oath 2.0 process](https://developer.concur.com/api-reference/authentication/authentication.html)
+- Be able to access the [Get Trips API](https://developer.concur.com/api-reference/travel/itinerary/trip/trip-resource.html#postnt)
+- Be able to access the [Itinerary Web Service (TMC & Third Party)](https://developer.concur.com/api-reference/travel/itinerary-tmc-thirdparty/index.html)
+- Ensure you have a definition ([XSD](https://developer.concur.com/api-reference/travel/itinerary/ItinServices_Public_0.xsd)), usable for architecting your solution
+
+#### Get Trip Details: Pulling Trip data from Concur
+The Get Trip Details endpoint allows Travel Supplier developers to pull trip detail data from Concur to match opportunities for users in a given local with user interests.  This is particularly useful if you want to provide an enhanced travel experience for your users. Or if you want to negotiate better rates with travel vendors. For example, TV Food Maps matches destinations on a user’s itinerary to notify them of a featured restaurant from a TV show like Diners, DriveIns and Dives near the location of their itinerary. Pulling trip details for hotels will indicate price variations within a given hotel chain and may provide the means for negotiating better rates.
+##### Get Trip details:
+
+You should build a scheduled process to poll for itineraries or get trips on demand when a user logs onto your website to make a booking. Using the Oauth token of the user for whom you want details as the authorization, perform this two-step process:
+
+1. GET a list of trips for the user.
+2. GET the details of each trip one at a time.
+
+For more information on how to GET a trip list for a user by using their Oauth token, consult: https://developer.concur.com/itinerary-tmc-and-third-party-developers/itinerary-resource/itinerary-resource-get#listofitins
+##### Example Get List of Trips request:
+
+GET https://{InstanceURL}/api/travel/trip/v1.1 HTTP/1.1
+Authorization: OAuth {user’s access token}
+Accept: application/xml
+
+Refer to the sample response below for guidance:
+```
+
+HTTP/1.1 200 OK
+<ItineraryInfoList
+    xmlns="http://www.concursolutions.com/api/travel/trip/2010/06"
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <ItineraryInfo>
+        <BookingSource>Getaway Airlines</BookingSource>
+        <DateModifiedUtc>2015-06-29T10:42:10</DateModifiedUtc>
+        <EndDateLocal>2015-12-15T13:49:00</EndDateLocal>
+        <Passengers>IAM SAMUEL</Passengers>
+        <RecordLocator>LTWD85, LW1FMP</RecordLocator>
+        <StartDateLocal>2015-12-15T07:50:00</StartDateLocal>
+        <TravelerFirst>Sam</TravelerFirst>
+        <TravelerLast>Iam</TravelerLast>
+        <TripId>gWuteQijFghZjZ9132JeHalpjBxBTnR8YXKvob37</TripId>
+        <TripName>Trip on Dec 15</TripName>
+        <UserLoginId>sam@company.com</UserLoginId>
+<id>https://www.concursolutions.com/api/travel/trip/v1.1/gWuteQijFghZjZ9132JeHalpjBxBTnR8YXKvob37</id>
+    </ItineraryInfo>
+    <ItineraryInfo>
+        <BookingSource>Getaway Airlines</BookingSource>
+        <DateModifiedUtc>2015-07-24T10:55:06</DateModifiedUtc>
+        <EndDateLocal>2015-12-01T07:09:00</EndDateLocal>
+        <Passengers>IAM SAMUEL</Passengers>
+        <RecordLocator>L1E818</RecordLocator>
+        <StartDateLocal>2015-12-01T05:30:00</StartDateLocal>
+        <TravelerFirst>Sam</TravelerFirst>
+        <TravelerLast>Iam</TravelerLast>
+        <TripId>gWuteQijFghdjYtpz2RK3qZR$s2SqUBgugyPHgHVd</TripId>
+        <TripName>Trip on Dec 1</TripName>
+        <UserLoginId>sam@company.com</UserLoginId>
+<id>https://www.concursolutions.com/api/travel/trip/v1.1/gWuteQijFghdjYtpz2RK3qZR$s2SqUBgugyPHgHVd</id>
+    </ItineraryInfo>
+</ItineraryInfoList>
+```
+
+#### Get the details of each trip by using the TripID.
+
+The Get Trip List response includes the unique TripID for each trip.
+
+##### Example trip details request
+
+GET https://{InstanceURL}/api/travel/trip/v1.1/{TripID} HTTP/1.1
+Authorization: OAuth {user’s access token}
+Accept: application/xml
+###### Refer to the sample response below for guidance:
+
+```
+HTTP/1.1 200 OK
+<?xml version="1.0" encoding="utf-8"?>
+<Itinerary
+    xmlns="http://www.concursolutions.com/api/travel/trip/2010/06">
+<id>https://www.concursolutions.com/api/travel/trip/v1.1/gWuteQijFghZjZ9132JeHalpjBxBTnR8YXKvob37</id>
+    <ItinLocator>gWuteQijFghZjZ9132JeHalpjBxBTnR8YXKvob37</ItinLocator>
+    <TripId>gWuteQijFghZjZ9132JeHalpjBxBTnR8YXKvob37</TripId>
+    <TripLinkLocator>I76CU3</TripLinkLocator>
+    <DateBookedLocal>2015-06-26T06:26:00</DateBookedLocal>
+    <DateCreatedUtc>2015-06-26T06:26:47</DateCreatedUtc>
+    <DateModifiedUtc>2015-06-29T10:42:10</DateModifiedUtc>
+    <Description>New itinerary</Description>
+    <EndDateLocal>2015-12-15T13:49:00</EndDateLocal>
+    <EndDateUtc>2015-12-15T19:49:00</EndDateUtc>
+    <StartDateLocal>2015-12-15T07:50:00</StartDateLocal>
+    <StartDateUtc>2015-12-15T15:50:00</StartDateUtc>
+    <TripName>Trip on Dec 15</TripName>
+    <TripStatus>0</TripStatus>
+    <Bookings>
+        <Booking>
+            <BookingOwner>OpenBookingSupplier</BookingOwner>
+            <Source>OpenBookingSupplier</Source>
+            <BookingSource>Getaway Airlines</BookingSource>
+            <DateBookedLocal>2015-06-26T06:26:00</DateBookedLocal>
+            <DateCreatedUtc>2015-06-26T06:26:47</DateCreatedUtc>
+            <DateModifiedUtc>2015-06-29T10:42:07</DateModifiedUtc>
+            <FormOfPaymentName>CreditCard</FormOfPaymentName>
+            <FormOfPaymentType>CC</FormOfPaymentType>
+            <RecordLocator>LTWD85</RecordLocator>
+            <AirlineTickets>
+…
+                </AirlineTicket>
+            </AirlineTickets>
+            <Passengers>
+                <Passenger>
+                    <NameFirst>Sam</NameFirst>
+                    <NameLast>Iam</NameLast>
+                </Passenger>
+            </Passengers>
+            <Segments>
+                <Air>
+                    <DateCreatedUtc>2015-06-26T22:23:20</DateCreatedUtc>
+                    <DateModifiedUtc>2015-06-29T10:42:07</DateModifiedUtc>
+                    <Vendor>GA</Vendor>
+                    <VendorName>Getaway</VendorName>
+                </Air>
+            </Segments>
+        </Booking>
+        <Booking>
+            <BookingOwner>OpenBookingSupplier</BookingOwner>
+            <Source>OpenBookingSupplier</Source>
+            <BookingSource>Getaway Airlines</BookingSource>
+            <DateBookedLocal>2015-06-29T10:42:00</DateBookedLocal>
+            <DateCreatedUtc>2015-06-29T10:42:07</DateCreatedUtc>
+            <DateModifiedUtc>2015-06-29T10:42:07</DateModifiedUtc>
+            <FormOfPaymentName>CreditCard</FormOfPaymentName>
+            <FormOfPaymentType>CC</FormOfPaymentType>
+            <RecordLocator>LW1FMP</RecordLocator>
+            <AirlineTickets>
+…
+                </AirlineTicket>
+            </AirlineTickets>
+            <Passengers>
+                <Passenger>
+                    <NameFirst>Sam</NameFirst>
+                    <NameLast>Iam</NameLast>
+                </Passenger>
+            </Passengers>
+            <Segments>
+                <Air>
+                    <DateCreatedUtc>2015-06-29T10:42:10</DateCreatedUtc>
+                    <DateModifiedUtc>2015-06-29T10:42:10</DateModifiedUtc>
+                    <Vendor>GA</Vendor>
+                    <VendorName>Getaway</VendorName>
+                </Air>
+            </Segments>
+        </Booking>
+    </Bookings>
+</Itinerary>
+```
+
+##### Important
+No itinerary can contain all of the possible elements, because the response will always be a subset of the possible returned values. For full response details, view the [Public Itinerary XSD](https://developer.concur.com/sites/default/files/ItinServices_Public_0.xsd ).
+
+#### Make us better at making your experience easier.
+Share a Concur API process issue we can do better. Provide us with an explanation, screen shots and your recommendation [here](http://forum.developer.concur.com/).
