@@ -1,5 +1,9 @@
-## Posting for eReceipt
+﻿## Posting for eReceipt
 This series of API Recipes describes API tasks associated with Apps for Me. Apps for Me are applications designed for individual business travelers, for example eReciepts and Traveler Awareness and Convenience apps like EZ Cater.
+
+Travel Suppliers and Travel Management Companies will want to use the process for posting an eReceipt and can skip the Before you begin section which follows.
+
+#### Before you Begin
 
 Before a partner user can download and use an App for Me from the App Center, ensure that you have completed the following:
 
@@ -14,15 +18,14 @@ Ensure that if your Partner currently generates a receipt image, (.png, .jpg,.ti
 *Concur generates a standard receipt for Partners who do not tender a receipt image. The standard receipt may not include additional fees and taxes collected the user�s locale like VAT.
 #### Posting for eReceipt: Submitting expenses to Concur
 The eReceipt endpoint allows app partners to send an eReceipt to Concur on behalf of the user. This is particularly useful if you want to provide an automated expense experience for your users. For example, Uber currently sends an eReceipt to Concur whenever a user makes a payment transaction. Instead of the user forwarding an Uber email receipt, an eReceipt is sent on his/her behalf. An eReceipt can contain the same information, if not all, of the partner's receipt.
+Currently the eReceipts service supports these three types of receipts: general purpose receipts, hotel receipts for either hospitality service or accommodation and ride receipt for a ride service. It is important to remember that the Receipt Service only accepts receipts up to six months old. For more information, consult the Receipts article in the [Concur.com API Reference]( https://developer.concur.com/api-reference/expense/receipts/index.html) materials.
 
 This diagram explains how to send an eReceipt to Concur:
 
 ```
-<!DOCTYPE html>
 <html>
 <body>
 
-<p>Insert an image from another folder:</p>
 <img src="/images/Send a receipt to Concur" alt="Send a receipt to Concur" width="380" height="640">
 
 </body>
