@@ -16,7 +16,7 @@ Before a partner user can download and use an App for Me from the App Center, en
 - Ensure your app has at least [two methods by which it can authenticate](https://developer.concur.com/api-reference/authentication/authentication.html#access-tokens)
 Ensure that if your Partner currently generates a receipt image, (.png, .jpg,.tif. pdf or other image file) that you include it in your post to Concur*
 
-*Concur generates a standard receipt for Partners who do not tender a receipt image. The standard receipt may not include additional fees and taxes collected the user�s locale like VAT.
+*Concur generates a standard receipt for Partners who do not tender a receipt image. The standard receipt may not include additional fees and taxes collected the user's locale like VAT.
 #### Posting for eReceipt: Submitting expenses to Concur
 The eReceipt endpoint allows app partners to send an eReceipt to Concur on behalf of the user. This is particularly useful if you want to provide an automated expense experience for your users. For example, Uber currently sends an eReceipt to Concur whenever a user makes a payment transaction. Instead of the user forwarding an Uber email receipt, an eReceipt is sent on his/her behalf. An eReceipt can contain the same information, if not all, of the partner's receipt.
 Currently the eReceipts service supports these three types of receipts: general purpose receipts, hotel receipts for either hospitality service or accommodation and ride receipt for a ride service. It is important to remember that the Receipt Service only accepts receipts up to six months old. For more information, consult the Receipts article in the [Concur.com API Reference]( https://developer.concur.com/api-reference/expense/receipts/index.html) materials.
