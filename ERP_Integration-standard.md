@@ -13,7 +13,7 @@ Before a partner user can obtain expense report data from Concur, ensure that yo
 #### Apps for my business: Standard Edition ERP Integration
 Standard Edition ERP Integration assumes that you are working for or on behalf of a Financial Integration Company. Once your app is certified, and you have obtained a signed letter of agreement from a client, you can obtain that client's expense report data through the extract file produced by Concur's service.
 
-API�s used to obtain extract files for your client
+API's used to obtain extract files for your client
 
 Before you begin, you need to have the client close the Payment Manager batch using the appropriate APIs in order for you to retrieve the files using the API below. Ask your client not to close the batch manually through the User Interface.
 
