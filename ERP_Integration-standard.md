@@ -4,8 +4,8 @@ This series of API Recipes describes API tasks associated with Apps for my busin
 Before a partner user can obtain expense report data from Concur, ensure that you have completed the following:
 
 - Ensure your app has been certified by Concur
-- Ensure your organization has obtained a signed letter of Agreement from a client stating that you can obtain that client�s expense report data using the extract file created by Concur�s service.
-- Ensure your app supports Concur�s App Center flow.
+- Ensure your organization has obtained a signed letter of Agreement from a client stating that you can obtain that client's expense report data using the extract file created by Concur's service.
+- Ensure your app supports Concur's App Center flow.
 - Ensure your app can authenticate with Concur using either [Native Flow](https://developer.concur.com/api-reference/authentication/authentication.html#native) (preferred) or Web Flow
 - Ensure your app includes the ability to [refresh the Concur authentication token](https://developer.concur.com/api-reference/authentication/authentication.html#refreshing-access-token)
 - Ensure your app includes the ability to respond appropriately to [revoked token messages](https://developer.concur.com/api-reference/authentication/authentication.html#revoke-all-access-tokens)
