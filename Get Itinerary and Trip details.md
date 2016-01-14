@@ -11,8 +11,6 @@ Understand the [Oath 2.0 process](https://developer.concur.com/api-reference/aut
 
 Developers, travel suppliers and travel management companies will want to use the processes described in this recipe.
 
-Developers, travel suppliers and travel management companies will want to use the processes described in this recipe.
-
 - With an authorized Oauth token, Developers can retrieve detailed itineraries for users or user groups. Using this data allows developers to create applications that match opportunities for users in a given locale, region or country specific to user interests.  For example, TV Food Maps matches destinations on a user’s itinerary to notify them of a featured restaurant from a TV show like Diners, DriveIns and Dives near the location of their itinerary
 - Travel Suppliers can use the processes to analyze itineraries/trips for gaps in such services as car rental and hotel accommodations, and use the information to offer these services. This is particularly useful if you want to provide an enhanced travel experience for your users
 - Travel Management Companies can use these processes to analyze individual or company travel data, offer traveler support services, Triplink support or business intelligence and analytics
@@ -22,9 +20,6 @@ The order in which most Concur partners obtain travel data from Concur is:
 1. Manually add a new itinerary. This creates a sample trip that allows the developer to retrieve their first itinerary via the API and with the response and the XSD, build a schema or data structure.
 2. Populate internal systems by building a scheduled process to poll for itineraries based on specific function parameters.
 3. Use the list of itineraries to obtain greater trip details. Most travel suppliers and TMC's will retrieve trip details based on day, time period or users.
-
-Each of these processes can be used by itself. For example if a travel supplier only wanted to obtain itinerary details, they can follow the Get Itinerary Details process described below.
-
 
 Each of these processes can be used by itself. For example if a travel supplier only wanted to obtain itinerary details, they can follow the Get Itinerary Details process described below.
 
